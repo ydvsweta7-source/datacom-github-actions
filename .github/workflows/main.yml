@@ -1,0 +1,27 @@
+name: Hello World Workflow
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  GREETING: "Hello from my first GitHub Action"
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Print greeting
+        run: echo "${{ env.GREETING }}, triggered by ${{ github.actor }}!"
+
+      - name: Show repo info
+        run: |
+          echo "Repo: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Event: ${{ github.event_name }}"
